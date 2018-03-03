@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" >
 <head>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -63,16 +65,13 @@
   };
 
 
-
-
-
   var canv1 = document.getElementById("canv1"),
       canv2 = document.getElementById("canv2"),
       canv3 = document.getElementById("canv3");
 
 
 var drawElement = function(div, number) {
-  var baseSize = 7,
+  var baseSize = 8,
 
       firstLineLength = baseSize * 4,
       radius = baseSize * 2,
@@ -88,7 +87,7 @@ var drawElement = function(div, number) {
       circleColor1 = "#a034bb",
       circleFill = "transparent",
       lineStrokeWidth = baseSize/2,
-      circleWidth = baseSize/2 + 1;
+      circleWidth = baseSize/2;
       console.log(firstLineLength);
 
   var line1 = {
@@ -251,13 +250,58 @@ for (var el=1; el <=3; el++) {
     svg.appendChild(pLine2);
     console.log(svg);
     number++;
+
+
+
     var svgBox = document.createElement('div');
-    svgBox.className = "svgBox";
+    svgBox.className = "active svgBox";
     svgBox.appendChild(svg);
+
+
+
+
+
+
+
     div.appendChild(svgBox);
+
+
 
 }
 
+var boxes = document.getElementsByClassName("svgBox");
+console.log(boxes);
+
+for (var n=0; n<boxes.length; n++) {
+  var box = boxes[n];
+  var textBox = document.createElement('div');
+      textBox.className = "title";
+      textBox.style.fontSize = baseSize*2+"px";
+
+      textBox.innerHTML = htmlData[n].title;
+      box.appendChild(textBox);
+
+  var numberBox = document.createElement('div');
+      numberBox.className = "number";
+      numberBox.style.fontSize = baseSize*3+"px";
+      numberBox.innerHTML = n+1;
+      box.appendChild(numberBox);
+
+
+  var priceBox = document.createElement('div');
+      priceBox.className = "price gradient-text";
+      priceBox.style.fontSize = Math.round(baseSize * 2.25) +"px";
+      priceBox.innerHTML = htmlData[n].price;
+      box.appendChild(priceBox);
+
+  var dateBox = document.createElement('div');
+      dateBox.className = "date";
+
+      dateBox.innerHTML = htmlData[n].date;
+      box.appendChild(dateBox);
+
+
+}
 
 
 

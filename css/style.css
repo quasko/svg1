@@ -26,8 +26,8 @@
 }
 .number {
   position: absolute;
-  top: 55px;
-  left: 51px;
+  top: 57px;
+  left: 41px;
   font-size: 30px;
   font-weight: bold;
   /*border: 2px solid red;*/
@@ -49,7 +49,7 @@
 .title {
   position: absolute;
   left: 0px;
-  top: 25px;
+  top: 35px;
   font-size: 20px;
   font-weight: bold;
   color: lightgray;
@@ -61,19 +61,20 @@
 
 .price {
   position: absolute;
-  top: 100px;
-  left: 55px;
+  top: 94px;
+  left: 48px;
   font-weight: bold;
   font-size: 18px;
-
+  color: black;
 }
 
 .date {
   position: absolute;
-  font-weight: bold;
-  top: 120px;
-  left: 55px;
-  font-size: 15px;
+
+  top: 117px;
+  left: 48px;
+  font-size: 13px;
+  color: black;
 }
 
 .gradient-text {
@@ -92,4 +93,5 @@
 
 .svgBox {
   float: left;
+  position: relative;
 }
