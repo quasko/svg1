@@ -4,12 +4,17 @@
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
 
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body>
 
-    <div id="elem1"></div>
-    <div id="elem2"></div>
-    <div id="elem3"></div>
+
+      <div id="elem1" class=""></div>
+      <div id="elem2" class=""></div>
+      <div id="elem3" class=""></div>
+
+
 
 
 
@@ -69,8 +74,7 @@
       canv2 = document.getElementById("canv2"),
       canv3 = document.getElementById("canv3");
 
-
-var drawElement = function(div, number) {
+  var activeItems = 3;
   var baseSize = 8,
 
       firstLineLength = baseSize * 4,
@@ -79,6 +83,10 @@ var drawElement = function(div, number) {
       elementWidth = function() {
         return firstLineLength + radius * 2 + secondLineLength;
       };
+
+var drawElement = function(div, number) {
+
+
 
   var startX = 0,
       startY = 75,
@@ -254,7 +262,7 @@ for (var el=1; el <=3; el++) {
 
 
     var svgBox = document.createElement('div');
-    svgBox.className = "active svgBox";
+    svgBox.className = "svgBox active";
     svgBox.appendChild(svg);
 
 
@@ -269,8 +277,22 @@ for (var el=1; el <=3; el++) {
 
 }
 
+}
+
+  var elem1 = document.getElementById("elem1");
+  drawElement(elem1,1);
+
+  var elem2 = document.getElementById("elem2");
+  drawElement(elem2,1);
+
+  var elem3 = document.getElementById("elem3");
+  drawElement(elem3,1);
+
+
+
 var boxes = document.getElementsByClassName("svgBox");
-console.log(boxes);
+
+console.log("278 " + boxes.length);
 
 for (var n=0; n<boxes.length; n++) {
   var box = boxes[n];
@@ -300,60 +322,22 @@ for (var n=0; n<boxes.length; n++) {
       dateBox.innerHTML = htmlData[n].date;
       box.appendChild(dateBox);
 
+      if(n >= activeItems) {
+        box.className = "svgBox";
+
+        var svgElement = $('svg path',box);
+        svgElement[0].style.stroke = "lightgrey";
+        svgElement[1].style.stroke = "lightgrey";
+
+        var svgElement = $('svg circle',box);
+        svgElement[0].style.stroke = "lightgrey";
+
+
+        console.log(svgElement);
+      }
+
 
 }
-
-
-
-
-
-/*
-var divTitle = document.createElement('div');
-divTitle.className = "title";
-divTitle.innerHTML = ""
-
-div.appendChild(divText);
-
-  //canv.appendChild(line);
-  /*
-  canv.appendChild(defs);
-  canv.appendChild(pLine1);
-  canv.appendChild(circle);
-  canv.appendChild(wLine);
-  canv.appendChild(pLine2);
-  /*
-  canv.appendChild(lineSecond);
-
-
-  */
-}
-
-/*
-  drawElement(canv1, 1);
-  drawElement(canv1, 2);
-  drawElement(canv1, 3);
-
-  drawElement(canv2, 1);
-  drawElement(canv2, 2);
-  drawElement(canv2, 3);
-
-  drawElement(canv3, 1);
-  drawElement(canv3, 2);
-  drawElement(canv3, 3);
-*/
-
-
-
-  var elem1 = document.getElementById("elem1");
-  drawElement(elem1,1);
-  var elem2 = document.getElementById("elem2");
-  drawElement(elem2,1);
-  var elem3 = document.getElementById("elem3");
-  drawElement(elem3,1);
-
-
-
-  //elem1.appendChild(drawElement(2));
 
 
 
