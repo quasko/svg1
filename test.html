@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+
+</head>
+<body>
+    <svg width="450" height="150" id="canv1">
+        <defs></defs>
+    </svg>
+    <svg width="450" height="150" id="canv2">
+        <defs></defs>
+    </svg>
+    <svg width="450" height="150" id="canv3">
+        <defs></defs>
+    </svg>
+
+
+
+
+    <svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg"
+    width="1000" height="1000">
+    <defs>
+        <linearGradient id="grad1">
+            <stop offset="0%" stop-color="#a034bb"/>
+            <stop offset="100%" stop-color="#d80a95" />
+        </linearGradient>
+        <linearGradient id="grad2">
+            <stop offset="0%" stop-color="#d80a95"/>
+            <stop offset="100%" stop-color="#a034bb" />
+        </linearGradient>
+    </defs>
+
+    <!--<path id="lineAB1" d="M500 252.01 L750 252" stroke="url(#grad2)" stroke-width="4" />-->
+</svg>
+<script>
+
+  var canv1 = document.getElementById("canv1"),
+      canv2 = document.getElementById("canv2"),
+      canv3 = document.getElementById("canv3");
+
+
+var drawElement = function(canv,number) {
+  var baseSize = 10,
+      firstLineLength = baseSize * 4,
+      radius = baseSize * 2,
+      secondLineLength = baseSize * 7,
+      startX = (number-1)*150 ,
+      startY = 75,
+      color1 = "#a034bb",
+      color2 = "#d80a95",
+      circleColor1 = "#a034bb",
+      circleFill = "transparent",
+      lineStrokeWidth = baseSize/2,
+      circleWidth = baseSize/2 + 1;
+      console.log(firstLineLength);
+
+  var line1 = {
+      x1: startX,
+      y1: startY,
+      x2: function() {
+        console.log(this.x1);
+        return this.x1 + firstLineLength;
+      },
+      y2: startY,
+      color: color1,
+      width: lineStrokeWidth
+
+  };
+
+  var circle1 = {
+    cx: startX + firstLineLength + radius,
+    cy: startY,
+    r: radius,
+    width: circleWidth,
+    color: circleColor1,
+    fill: circleFill
+  };
+
+  var whiteLine = {
+    x1: startX + firstLineLength + radius,
+    y1: startY - radius - circleWidth/2,
+    x2: function() {
+      return this.x1
+    },
+    y2: function() {
+      return this.y1 + radius * 2 + circleWidth;
+    },
+    color: "white",
+    width: circleWidth
+
+  };
+
+  var line2 = {
+      x1: startX + firstLineLength + radius * 2,
+      y1: startY,
+      x2: function() {
+        console.log(this.x1);
+        return this.x1 + secondLineLength;
+      },
+      y2: startY,
+      color: color2,
+      width: lineStrokeWidth
+
+  };
+
+  var stops1 = [
+    {
+        "color": "#a034bb",
+        "offset": "0%"
+    },{
+        "color": "#d80a95",
+        "offset": "100%"
+    }
+  ];
+
+  var stops2 = [
+    {
+        "color": "#d80a95",
+        "offset": "0%"
+    },{
+        "color": "#a034bb",
+        "offset": "100%"
+    }
+  ];
+
+
+
+  var svgns = 'http://www.w3.org/2000/svg';
+  var defs = document.createElementNS(svgns, 'defs');
+  var gradient1 = document.createElementNS(svgns, 'linearGradient');
+
+  gradient1.setAttribute("id","grad1");
+  for (var i = 0, length = stops1.length; i < length; i++) {
+
+    // Create a <stop> element and set its offset based on the position of the for loop.
+    var stop = document.createElementNS(svgns, 'stop');
+    stop.setAttribute('offset', stops1[i].offset);
+    stop.setAttribute('stop-color', stops1[i].color);
+
+    // Add the stop to the <lineargradient> element.
+    gradient1.appendChild(stop);
+
+  }
+
+  defs.appendChild(gradient1);
+
+  var gradient2 = document.createElementNS(svgns, 'linearGradient');
+
+  gradient2.setAttribute("id","grad2");
+  for (var i = 0, length = stops2.length; i < length; i++) {
+
+    // Create a <stop> element and set its offset based on the position of the for loop.
+    var stop = document.createElementNS(svgns, 'stop');
+    stop.setAttribute('offset', stops2[i].offset);
+    stop.setAttribute('stop-color', stops2[i].color);
+
+    // Add the stop to the <lineargradient> element.
+    gradient2.appendChild(stop);
+
+  }
+
+  defs.appendChild(gradient2);
+
+
+  /*
+  var line  = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", line1.x1);
+      line.setAttribute("y1", line1.y1);
+      line.setAttribute("x2", line1.x2());
+      line.setAttribute("y2", line1.y2);
+      line.setAttribute("stroke-width", line1.width);
+      line.setAttribute("stroke", line1.color);
+  */
+
+  var pLine1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      pLine1.setAttribute("d", "M0 100.01 L100 100");
+      pLine1.setAttribute("stroke", "url(#grad1)");
+      pLine1.setAttribute("stroke-width", line1.width);
+      /*<path id="lineAB1" d="M500 252.01 L750 252" stroke="url(#grad2)" stroke-width="4" />*/pLine1
+
+  var lineSecond = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      lineSecond.setAttribute("x1",line2.x1);
+      lineSecond.setAttribute("y1",line2.y1);
+      lineSecond.setAttribute("x2",line2.x2());
+      lineSecond.setAttribute("y2",line2.y2);
+      lineSecond.setAttribute("stroke-width",line2.width);
+      lineSecond.setAttribute("stroke",line2.color);
+
+  var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("cx", circle1.cx);
+      circle.setAttribute("cy", circle1.cy);
+      circle.setAttribute("r", circle1.r);
+      circle.setAttribute("stroke", circle1.color);
+      circle.setAttribute("stroke-width", circle1.width);
+      circle.setAttribute("fill", circle1.fill);
+
+  var wLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      wLine.setAttribute("x1", whiteLine.x1);
+      wLine.setAttribute("y1", whiteLine.y1);
+      wLine.setAttribute("x2", whiteLine.x2());
+      wLine.setAttribute("y2", whiteLine.y2());
+      wLine.setAttribute("stroke-width", whiteLine.width);
+      wLine.setAttribute("stroke", whiteLine.color);
+
+
+  //canv.appendChild(line);
+  canv.appendChild(defs);
+  canv.appendChild(pLine1);
+
+  /*
+  canv.appendChild(lineSecond);
+  canv.appendChild(circle);
+  canv.appendChild(wLine);
+  */
+}
+
+
+  drawElement(canv1, 1);
+  drawElement(canv1, 2);
+  drawElement(canv1, 3);
+
+  drawElement(canv2, 1);
+  drawElement(canv2, 2);
+  drawElement(canv2, 3);
+
+  drawElement(canv3, 1);
+  drawElement(canv3, 2);
+  drawElement(canv3, 3);
+
+
+
+</script>
+
+</body>
+</html>

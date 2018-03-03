@@ -17,6 +17,7 @@
 .box-background {
   float: left;
   position: relative;
+  color: lightgray;
 }
 
 .box-background .box {
@@ -30,14 +31,18 @@
   font-size: 30px;
   font-weight: bold;
   /*border: 2px solid red;*/
+  color: lightgray;
+}
+
+.active .number {
   color: #a034bb;
 }
 
-.number2 {
+.active .number2 {
   color: #d80a95;
 }
 
-.number3{
+.active .number3{
   color: #e64bcb;
 }
 
@@ -47,6 +52,10 @@
   top: 25px;
   font-size: 20px;
   font-weight: bold;
+  color: lightgray;
+}
+
+.active .title {
   color: #a034bb;
 }
 
@@ -68,12 +77,15 @@
 }
 
 .gradient-text {
-  background: linear-gradient(to right, #032ba2, #f004bb);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: #0B2349;
+  
+  color: lightgray;
   display: table;
  
 }
 
-
+.active .gradient-text {
+  color: #0B2349;
+  background: linear-gradient(to right, #032ba2, #f004bb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
