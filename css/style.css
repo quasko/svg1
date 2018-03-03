@@ -9,6 +9,10 @@
 
 }
 
+.elem {
+  float: left;
+}
+
 
 .relative {
   position: relative;
