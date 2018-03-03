@@ -1,12 +1,12 @@
 .round-border {
   /*position: absolute;*/
- 
-  
+
+
   /*border: 1px solid red;*/
   margin:0;
 
-  
-  
+
+
 }
 
 
@@ -21,7 +21,7 @@
 }
 
 .box-background .box {
-  
+
   z-index: 10;
 }
 .number {
@@ -65,7 +65,7 @@
   left: 55px;
   font-weight: bold;
   font-size: 18px;
-  
+
 }
 
 .date {
@@ -77,10 +77,10 @@
 }
 
 .gradient-text {
-  
+
   color: lightgray;
   display: table;
- 
+
 }
 
 .active .gradient-text {
@@ -88,4 +88,8 @@
   background: linear-gradient(to right, #032ba2, #f004bb);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.svgBox {
+  float: left;
 }
