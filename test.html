@@ -74,7 +74,7 @@
       canv2 = document.getElementById("canv2"),
       canv3 = document.getElementById("canv3");
 
-  var activeItems = 3;
+  var activeItems = 5;
   var baseSize = 8,
 
       firstLineLength = baseSize * 4,
@@ -83,6 +83,8 @@
       elementWidth = function() {
         return firstLineLength + radius * 2 + secondLineLength;
       };
+
+  var circleColors = ["#a034bb", "#fc0e8b","#df41d2"];
 
 var drawElement = function(div, number) {
 
@@ -156,6 +158,18 @@ var drawElement = function(div, number) {
         "offset": "100%"
     }
   ];
+
+  var stops3 = [
+    {
+        "color": "#d80a95",
+        "offset": "0%"
+    },{
+        "color": "#a034bb",
+        "offset": "100%"
+    }
+  ];
+
+
 
 
 
@@ -236,7 +250,7 @@ for (var el=1; el <=3; el++) {
       circle.setAttribute("cx", circle1.cx);
       circle.setAttribute("cy", circle1.cy);
       circle.setAttribute("r", circle1.r);
-      circle.setAttribute("stroke", circle1.color);
+      circle.setAttribute("stroke", circleColors[el-1]);
       circle.setAttribute("stroke-width", circle1.width);
       circle.setAttribute("fill", circle1.fill);
 
@@ -253,9 +267,10 @@ for (var el=1; el <=3; el++) {
 
 
     svg.appendChild(pLine1);
+    svg.appendChild(pLine2);
     svg.appendChild(circle);
     svg.appendChild(wLine);
-    svg.appendChild(pLine2);
+
     console.log(svg);
     number++;
 
