@@ -102,3 +102,10 @@
   float: left;
   position: relative;
 }
+
+
+@media screen and (max-width: 768px) {
+  .elem {
+    width:100%;
+  }
+}
