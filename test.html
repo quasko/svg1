@@ -21,12 +21,34 @@
 
 
 <script>
+   var activeItems = 5;
   var htmlData = [];
 
   htmlData[0] = {
     title: 'round',
     price: '$ 0,07143',
-    date: '31 dec 2017'
+    date: '31 dec 2017',
+    line1Gradient: [
+        {
+            "color": "#4781fc",
+            "offset": "0%"
+        },{
+            "color": "#a430b8",
+            "offset": "100%"
+        }
+      ],
+
+    line2Gradient: [
+        {
+            "color": "#a430b8",
+            "offset": "0%"
+        },{
+            "color": "#a430b8",
+            "offset": "100%"
+        }
+      ]
+
+
   };
   htmlData[1] = {
     title: 'round',
@@ -74,7 +96,10 @@
       canv2 = document.getElementById("canv2"),
       canv3 = document.getElementById("canv3");
 
-  var activeItems = 5;
+
+  var enterValue = $('#inputField').val();
+  console.log(enterValue);
+
   var baseSize = 8,
 
       firstLineLength = baseSize * 4,
@@ -98,7 +123,7 @@ var drawElement = function(div, number) {
       circleFill = "transparent",
       lineStrokeWidth = baseSize/2,
       circleWidth = baseSize/2;
-      console.log(firstLineLength);
+
 
   var line1 = {
       x1: startX,
@@ -130,7 +155,7 @@ var drawElement = function(div, number) {
       x1: startX + firstLineLength + radius * 2,
       y1: startY,
       x2: function() {
-        console.log(this.x1);
+
         return this.x1 + secondLineLength;
       },
       y2: startY,
@@ -141,36 +166,87 @@ var drawElement = function(div, number) {
 
   var stops1 = [
     {
-        "color": "#a034bb",
+        "color": "#4285fe",
         "offset": "0%"
     },{
-        "color": "#d80a95",
+        "color": "#a034bb",
         "offset": "100%"
     }
   ];
 
   var stops2 = [
     {
-        "color": "#d80a95",
+        "color": "#a034bb",
         "offset": "0%"
     },{
-        "color": "#a034bb",
+        "color": "#ee018b",
         "offset": "100%"
     }
   ];
 
   var stops3 = [
     {
-        "color": "#d80a95",
+        "color": "#ee018b",
         "offset": "0%"
     },{
-        "color": "#a034bb",
+        "color": "#fc0e8b",
         "offset": "100%"
     }
   ];
 
+  var stops4 = [
+    {
+        "color": "#fc0e8b",
+        "offset": "0%"
+    },{
+        "color": "#ff62a0",
+        "offset": "100%"
+    }
+  ];
 
+   var stops5 = [
+    {
+        "color": "#ff62a0",
+        "offset": "0%"
+    },{
+        "color": "#df41d2",
+        "offset": "100%"
+    }
+  ];
 
+  var stops6 = [
+    {
+        "color": "#df41d2",
+        "offset": "0%"
+    },{
+        "color": "#4285fe",
+        "offset": "100%"
+    }
+  ];
+
+  var stops = [stops1, stops2, stops3, stops4, stops5, stops6];
+  var defsArray = [];
+  for (var gr=0; gr< stops.length; gr++){
+    var svgns = 'http://www.w3.org/2000/svg';
+    var defs = document.createElementNS(svgns, 'defs');
+    var gradient = document.createElementNS(svgns, 'linearGradient');
+    gradient.setAttribute("id","gr"+gr);
+    for (var si = 0;  si < stops[gr].length; si++) {
+
+      // Create a <stop> element and set its offset based on the position of the for loop.
+      var stop = document.createElementNS(svgns, 'stop');
+      stop.setAttribute('offset', stops[gr][si].offset);
+      stop.setAttribute('stop-color', stops[gr][si].color);
+
+      // Add the stop to the <lineargradient> element.
+      gradient.appendChild(stop);
+      defs.appendChild(gradient);
+    }
+
+    defsArray[gr] = defs;
+
+  }
+//console.log(defsArray[1].innerHTML);
 
 
   var svgns = 'http://www.w3.org/2000/svg';
@@ -202,7 +278,6 @@ var drawElement = function(div, number) {
     var stop = document.createElementNS(svgns, 'stop');
     stop.setAttribute('offset', stops2[i].offset);
     stop.setAttribute('stop-color', stops2[i].color);
-
     // Add the stop to the <lineargradient> element.
     gradient2.appendChild(stop);
 
@@ -213,26 +288,30 @@ var drawElement = function(div, number) {
 
 
 
-for (var el=1; el <=3; el++) {
+for (var el=0; el <3; el++) {
   var svg = document.createElementNS(svgns, 'svg');
   svg.setAttribute('width', elementWidth());
   svg.setAttribute('height', '150px');
   svg.setAttribute('version', '1.1');
   svg.setAttribute('xmlns', svgns);
-  svg.appendChild(defs);
-  console.log(defs);
+  svg.appendChild(defsArray[el+el]);
 
 
+  svg.appendChild(defsArray[el+el+1]);
+  //console.log(defs);
+
+  var gradientIndex1= el+el;
+  var gradientIndex2= el+el+1;
 
   var pLine1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
       pLine1.setAttribute("d", "M" + line1.x1 + " "+ line1.y1 + " L" + line1.x2 +" " +line1.y2 + ".01");
-      pLine1.setAttribute("stroke", "url(#grad2)");
+      pLine1.setAttribute("stroke", "url(#gr" +gradientIndex1+ ")");
       pLine1.setAttribute("stroke-width", line1.width);
       pLine1.setAttribute("stroke-linecap", "butt");
 
   var pLine2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
       pLine2.setAttribute("d", "M" + line2.x1 + " " + line2.y1 + ".01 L" + line2.x2() +" " + line2.y2 );
-      pLine2.setAttribute("stroke", "url(#grad1)");
+      pLine2.setAttribute("stroke", "url(#gr" +gradientIndex2+ ")");
       pLine2.setAttribute("stroke-width", line1.width);
       pLine2.setAttribute("stroke-linecap", "butt");
 
@@ -250,7 +329,7 @@ for (var el=1; el <=3; el++) {
       circle.setAttribute("cx", circle1.cx);
       circle.setAttribute("cy", circle1.cy);
       circle.setAttribute("r", circle1.r);
-      circle.setAttribute("stroke", circleColors[el-1]);
+      circle.setAttribute("stroke", circleColors[el]);
       circle.setAttribute("stroke-width", circle1.width);
       circle.setAttribute("fill", circle1.fill);
 
@@ -271,7 +350,7 @@ for (var el=1; el <=3; el++) {
     svg.appendChild(circle);
     svg.appendChild(wLine);
 
-    console.log(svg);
+
     number++;
 
 
@@ -305,10 +384,13 @@ for (var el=1; el <=3; el++) {
 
 
 
-var boxes = document.getElementsByClassName("svgBox");
 
-console.log("278 " + boxes.length);
 
+
+
+
+
+  var boxes = document.getElementsByClassName("svgBox");
 for (var n=0; n<boxes.length; n++) {
   var box = boxes[n];
   var textBox = document.createElement('div');
@@ -337,6 +419,10 @@ for (var n=0; n<boxes.length; n++) {
       dateBox.innerHTML = htmlData[n].date;
       box.appendChild(dateBox);
 
+
+
+
+
       if(n >= activeItems) {
         box.className = "svgBox";
 
@@ -348,7 +434,7 @@ for (var n=0; n<boxes.length; n++) {
         svgElement[0].style.stroke = "lightgrey";
 
 
-        console.log(svgElement);
+
       }
 
 
